@@ -1,0 +1,122 @@
+﻿<!--
+* This file is part of Ashita.
+*
+* Ashita is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Ashita is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public License
+* along with Ashita.  If not, see<http://www.gnu.org/licenses/> .
+-->
+    
+<metro:MetroWindow
+    x:Class="Ashita.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Ashita.ViewModel"
+    xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:View="clr-namespace:Ashita.View"
+    Icon="..\Assets\ashita.ico" Title="Ashita Boot Loader" Width="525" Height="350"
+    ResizeMode="CanMinimize" ShowMaxRestoreButton="False" WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <!--
+    Window DataContext
+    -->
+    
+    <metro:MetroWindow.DataContext>
+        <vm:MainViewModel />
+    </metro:MetroWindow.DataContext>
+    
+    <!--
+    Window Resources
+    -->
+    
+    <metro:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Assets/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </metro:MetroWindow.Resources>
+
+    <!--
+    Window Background Gradient
+    -->
+
+    <metro:MetroWindow.Background>
+        <LinearGradientBrush MappingMode="Absolute" StartPoint="0,200" EndPoint="0,500">
+            <GradientStop Color="{DynamicResource WhiteColor}" />
+            <GradientStop Color="Gainsboro" Offset="1"/>
+        </LinearGradientBrush>
+    </metro:MetroWindow.Background>
+
+    <!--
+    Window Titlebar Buttons
+    -->
+
+    <metro:MetroWindow.WindowCommands>
+        <metro:WindowCommands>
+            <Button Command="{Binding OpenBugReportsCommand}" ToolTip="Help us by submitting bug reports!">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="16" Height="16">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_alien}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Padding="5,0,0,0" Text="Bugs" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding OpenForumsCommand}" ToolTip="Find the latest news and information on our forums!">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="16" Height="16">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_twocolumn}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Padding="5,0,0,0" Text="Forums" Foreground="White"/>
+                </StackPanel>
+            </Button>
+        </metro:WindowCommands>
+    </metro:MetroWindow.WindowCommands>
+
+    <!--
+    Main Window Content
+    -->
+    
+    <Grid x:Name="mainContentGrid">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            
+            <!-- Launcher View -->
+            <TabItem Header="Launcher">
+                <View:LauncherView />
+            </TabItem>
+            
+            <!-- Updates View -->
+            <TabItem Header="Updates">
+                <View:UpdatesView />
+            </TabItem>
+            
+            <!-- About View -->
+            <TabItem Header="About">
+                <View:AboutView />
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+
+</metro:MetroWindow>
+    

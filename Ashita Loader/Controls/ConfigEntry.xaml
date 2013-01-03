@@ -1,0 +1,52 @@
+﻿
+<!--
+* This file is part of Ashita.
+*
+* Ashita is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Ashita is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public License
+* along with Ashita.  If not, see<http://www.gnu.org/licenses/> .
+-->
+
+<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters="clr-namespace:Ashita.Converters" x:Class="Ashita.Controls.ConfigEntry" 
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="400"
+             Background="#01FFFFFF">
+
+    <UserControl.Resources>
+        <Converters:NullToDefaultString x:Key="NullToDefaultString"/>
+        <Converters:ResourceLanguageToString x:Key="ResourceLanguageToString"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="configEntryMain">
+        <StackPanel>
+            <Label x:Name="lblConfigName" Content="{Binding Name}" FontWeight="Bold" FontSize="16" Margin="0,-6,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="10,-12,0,0" HorizontalAlignment="Stretch">
+                <Label Content="Language:" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label x:Name="lblConfigInfo" Content="{Binding Language, Converter={StaticResource ResourceLanguageToString}}" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label Content=", Window Size:" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label x:Name="lblWindowScreenX" Content="{Binding ResolutionX}" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label Content="x" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label x:Name="lblWindowScreenY" Content="{Binding ResolutionY}" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,-12,0,0" HorizontalAlignment="Stretch">
+                <Label Content="Boot File:" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+                <Label x:Name="lblConfigBoot" Content="{Binding BootFile, Converter={StaticResource NullToDefaultString}}" FontStyle="Italic" FontSize="10" Opacity="0.75" Padding="2,5,0,5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

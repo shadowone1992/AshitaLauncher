@@ -1,0 +1,281 @@
+﻿<!--
+* This file is part of Ashita.
+*
+* Ashita is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Ashita is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public License
+* along with Ashita.  If not, see<http://www.gnu.org/licenses/> .
+-->
+
+<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converters="clr-namespace:Ashita.Converters" x:Class="Ashita.Controls.ConfigEdit" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="525"
+             >
+
+    <!--
+    Window Resources
+    -->
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Converters:PlayOnlineLanguageToIndex x:Key="PlayOnlineLanguageToIndex"/>
+
+            <Converters:ResourceLanguageToIndex x:Key="ResourceLanguageToIndex"/>
+
+            <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="Margin" Value="0,1" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Width" Value="125" />
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <Binding Path="Launcher.TempConfig" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
+    
+    <Grid x:Name="mainContentGrid" Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Config Shortname:"/>
+                <TextBox Text="{Binding Name}" Width="125" ToolTip="Enter a name to show when this config is displayed in the launcher."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Boot File:"/>
+                <TextBox Text="{Binding BootFile}" Width="108" ToolTip="The full path to the file you wish to launch. Leave blank for default PlayOnline."/>
+                <Button Content="..." ToolTip="Browse for file to launch.."
+					Command="{Binding Launcher.BrowseLaunchFileCommand, Source={StaticResource Locator}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Boot Command:"/>
+                <TextBox Text="{Binding BootCommand}" Width="125" ToolTip="The command arguments to pass to the boot file when it is being loaded."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Startup Script:"/>
+                <TextBox Text="{Binding StartupScript}" Width="125" ToolTip="The script you wish to have execute when Ashita first starts."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="PlayOnline Version:"/>
+                <ComboBox Width="125" SelectedIndex="{Binding PolVersion, Converter={StaticResource PlayOnlineLanguageToIndex}}" ToolTip="Select the PlayOnline language you use.">
+                    <ComboBoxItem Content="JP"/>
+                    <ComboBoxItem Content="US"/>
+                    <ComboBoxItem Content="EU"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Resource Language:"/>
+                <ComboBox Width="125" SelectedIndex="{Binding Language, Converter={StaticResource ResourceLanguageToIndex}}" ToolTip="Select the Ashita resource language you wish to use.">
+                    <ComboBoxItem Content="JP"/>
+                    <ComboBoxItem Content="US"/>
+                    <ComboBoxItem Content="FR"/>
+                    <ComboBoxItem Content="DE"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Window Size:"/>
+                <TextBox Text="{Binding ResolutionX}" Width="55" ToolTip="The window width you wish to play with."/>
+                <Label Content="x" Width="15"/>
+                <TextBox Text="{Binding ResolutionY}" Width="55" ToolTip="The window height you wish to play with."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Background Size:"/>
+                <TextBox Text="{Binding BackgroundX}" Width="55" ToolTip="The background width you wish to play with. (Set to -1 to ignore.)"/>
+                <Label Content="x" Width="15"/>
+                <TextBox Text="{Binding BackgroundY}" Width="55" ToolTip="The background height you wish to play with. (Set to -1 to ignore.)"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Menu Size:"/>
+                <TextBox Text="{Binding MenuX}" Width="55" ToolTip="The menu width you wish to play with. (Set to -1 to ignore.)"/>
+                <Label Content="x" Width="15"/>
+                <TextBox Text="{Binding MenuY}" Width="55" ToolTip="The menu height you wish to play with. (Set to -1 to ignore.)"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Logging Level:"/>
+                <ComboBox Width="125" SelectedIndex="{Binding LogLevel}" ToolTip="Select the Ashita resource language you wish to use.">
+                    <ComboBoxItem Content="0 - No logging."/>
+                    <ComboBoxItem Content="1 - Log errors."/>
+                    <ComboBoxItem Content="2 - Log warnings."/>
+                    <ComboBoxItem Content="3 - Log info."/>
+                    <ComboBoxItem Content="4 - Debug"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="D3D8 Buffer Count:"/>
+                <TextBox Text="{Binding D3DPresentParamsBufferCount}" Width="125" ToolTip="Sets the number of buffers to use. (Recommended: 1)"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="D3D8 Swap Effect:"/>
+                <ComboBox Width="125" SelectedIndex="0" ToolTip="Sets the swap effect of Direct3D8. (Use 4 if you need vsync.)">
+                    <ComboBoxItem Content="1 - Discard"/>
+                    <ComboBoxItem Content="2 - Flip"/>
+                    <ComboBoxItem Content="3 - Copy"/>
+                    <ComboBoxItem Content="4 - Copy Vsync"/>
+                </ComboBox>
+            </StackPanel>
+
+            <CheckBox Margin="10,10,0,0" IsChecked="{Binding AutoClose}" Content="Auto-close launcher after injection?"/>
+            <CheckBox Margin="10,10,0,0" IsChecked="{Binding ShowBorder}" Content="Show window border around FFXI?"/>
+            <CheckBox Margin="10,10,0,0" IsChecked="{Binding UnhookMouse}" Content="Unhook mouse?" ToolTip="If enabled, FFXI can no longer snap your mouse to menu positions."/>
+            <CheckBox Margin="10,10,0,0" IsChecked="{Binding TestServer}" Content="Test Server?" ToolTip="If you wish to connect to the test server with Ashita, tick this option."/>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Save Config" Width="100" Height="20" Margin="0,0,10,0"
+				Command="{Binding Launcher.SaveEditConfigCommand, Source={StaticResource Locator}}"/>
+            <Button Grid.Column="1" Content="Cancel" Width="100" Height="20" 
+				Command="{Binding Launcher.CancelEditConfigCommand, Source={StaticResource Locator}}"/>
+        </Grid>
+    </Grid>
+</UserControl>
+
+
+<!--
+        <ScrollViewer BorderBrush="Black" BorderThickness="100">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Margin" Value="0,1" />
+                    </Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Width" Value="125" />
+                        <Setter Property="HorizontalContentAlignment" Value="Right"></Setter>
+                    </Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Margin" Value="25,0,0,0"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </StackPanel.Resources>
+                    
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Shortname:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="Enter a name to show when this config is displayed in the launcher."/>
+                    <CheckBox Content="Auto close launcher after injection."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Boot File:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="Enter the full path to the file you wish to launch.\r\nLeave blank for Default PlayOnline."/>
+                    <CheckBox Content="Show Border - Display FFXI in a window?"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Boot Command:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="Enter the command arguments to pass to the boot file when it is being loaded."/>
+                    <CheckBox Content="Unhook mouse?"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Startup Script:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The script you wish to have execute when Ashita first starts."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="PlayOnline Version:"/>
+                    <ComboBox Width="125" SelectedIndex="1" ToolTip="Select the PlayOnline language you use.">
+                        <ComboBox.Items>
+                            <ComboBoxItem>JP</ComboBoxItem>
+                            <ComboBoxItem>US</ComboBoxItem>
+                            <ComboBoxItem>EU</ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Resource Language:"/>
+                    <ComboBox Width="125" SelectedIndex="1" ToolTip="Select the Ashita resource language you wish to use.">
+                        <ComboBox.Items>
+                            <ComboBoxItem>JP</ComboBoxItem>
+                            <ComboBoxItem>US</ComboBoxItem>
+                            <ComboBoxItem>FR</ComboBoxItem>
+                            <ComboBoxItem>DE</ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Window Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Background Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+
+
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Menu Size:"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window width you wish to play with."/>
+                    <Label Content="x" Width="15"/>
+                    <TextBox Text="Test" Width="125" ToolTip="The window height you wish to play with."/>
+                </StackPanel>
+            </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>
+-->

@@ -1,0 +1,30 @@
+﻿<!--
+    
+    Read the license the link below:
+    http://creativecommons.org/licenses/by/3.0/
+    
+    Basicaly, use it anyway you want but include this
+    license file in the source if your project is open
+    source. Nothing is needed in the front facing project.
+    Commercial use is not only allowed but encouraged.
+    This pack was made to promote consistency in
+    applications.
+    
+    Icons in this file are thanks to:
+    https://github.com/Templarian/WindowsIcons
+-->
+    
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Original: appbar.twocolumn.xaml -->
+    <Canvas x:Key="appbar_twocolumn" Width="16" Height="16" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+        <Path Width="38" Height="34.8333" Canvas.Left="19" Canvas.Top="20.5833" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 19,20.5833L 57,20.5834L 57,23.75L 19,23.75L 19,20.5833 Z M 19,26.9167L 56.9999,26.9167L 56.9999,30.0834L 19,30.0834L 19,26.9167 Z M 19,33.2501L 56.9999,33.2501L 56.9999,36.4167L 19,36.4167L 19,33.2501 Z M 19,39.5834L 57,39.5834L 57,42.75L 19,42.75L 19,39.5834 Z M 19,45.9167L 57,45.9167L 57,49.0833L 19,49.0834L 19,45.9167 Z M 19,52.25L 57,52.25L 57,55.4167L 19,55.4167L 19,52.25 Z "/>
+    </Canvas>
+
+    <!-- Original: appbar.alien.xaml -->
+    <Canvas x:Key="appbar_alien" Width="16" Height="16" Clip="F1 M 0,0L 76.0106,0L 76.0106,76.0106L 0,76.0106L 0,0">
+        <Path Width="34.8412" Height="25.3409" Canvas.Left="20.5832" Canvas.Top="26.9164" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 26.9165,26.9164L 30.0836,26.9164L 30.0875,30.0875L 33.2503,30.0831L 33.2546,33.2546L 42.756,33.2546L 42.7498,30.0831L 45.9165,30.0831L 45.9165,26.9164L 49.0836,26.9164L 49.0836,30.0835L 45.9169,30.0835L 45.9231,33.2546L 49.0902,33.2546L 49.0902,36.4218L 52.2573,36.4218L 52.2573,39.5889L 49.0902,39.5889L 49.0836,49.0836L 45.9169,49.0836L 45.9169,52.2502L 39.5889,52.2573L 39.5889,49.0902L 45.9165,49.0831L 45.9231,44.3395L 30.0875,44.3395L 30.0875,49.0902L 26.9204,49.0902L 26.9165,39.5835L 23.7503,39.5835L 23.7503,45.9169L 20.5832,45.9169L 20.5832,39.5831L 23.7498,39.5831L 23.7498,36.4164L 26.9165,36.4164L 26.9204,33.2546L 30.0875,33.2546L 30.0832,30.0835L 26.9165,30.0835L 26.9165,26.9164 Z M 52.2573,39.5889L 55.4244,39.5889L 55.4244,45.9231L 52.2573,45.9231L 52.2573,39.5889 Z M 30.0875,49.0902L 36.4217,49.0902L 36.4217,52.2573L 30.0875,52.2573L 30.0875,49.0902 Z M 30.0875,36.4218L 30.0875,39.5889L 33.2546,39.5889L 33.2546,36.4218L 30.0875,36.4218 Z M 42.756,36.4218L 42.756,39.5889L 45.9231,39.5889L 45.9231,36.4218L 42.756,36.4218 Z "/>
+    </Canvas>
+    
+</ResourceDictionary>
