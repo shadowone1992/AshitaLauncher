@@ -100,7 +100,7 @@ namespace Ashita.Classes
 
             // Attempt to launch the game suspended..
             var bootFile = (config.BootFile.Length > 0) ? config.BootFile : polPath + "\\pol.exe";
-            var procId = ManagedInjector.CreateSuspended(bootFile, config.BootCommand);
+            var procId = ManagedInjector.CreateSuspended(bootFile, String.Format("{0} {1}", bootFile, config.BootCommand));
             if (procId == 0)
             {
                 Error("Ashita failed to load the boot file.");
