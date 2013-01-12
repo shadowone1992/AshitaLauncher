@@ -42,7 +42,7 @@ namespace Ashita.Converters
         /// <returns></returns>
         public Object Convert(Object value, Type targetType, Object param, CultureInfo culture)
         {
-            var langStrings = new[] { "Invalid", "JP", "US", "EU" };
+            var langStrings = new[] { "Invalid", "JP", "US", "FR", "DE" };
             return langStrings[(int)value];
         }
 
@@ -62,8 +62,10 @@ namespace Ashita.Converters
                     return 1;
                 case "US":
                     return 2;
-                case "EU":
+                case "FR":
                     return 3;
+                case "DE":
+                    return 4;
                 default:
                     return 2;
             }
