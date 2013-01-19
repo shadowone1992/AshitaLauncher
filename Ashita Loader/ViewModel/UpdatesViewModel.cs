@@ -89,6 +89,9 @@ namespace Ashita.ViewModel
         /// </summary>
         private void OnUpdateSelectedClicked()
         {
+            if (this.UpdateFiles == null)
+                return;
+
             var selectedFiles = this.UpdateFiles.Where(x => x.IsSelected).ToList();
             if (!selectedFiles.Any())
                 return;
@@ -121,6 +124,9 @@ namespace Ashita.ViewModel
         /// </summary>
         private void OnUpdateAllFilesClicked()
         {
+            if (this.UpdateFiles == null)
+                return;
+
             var selectedFiles = this.UpdateFiles.ToList();
             if (!selectedFiles.Any())
                 return;

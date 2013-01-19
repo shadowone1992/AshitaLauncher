@@ -128,7 +128,7 @@ namespace Ashita.Classes
                 {
                     InstallPath = AppDomain.CurrentDomain.BaseDirectory,
                     ConfigPath = config.FilePath,
-                    Language = (int)config.Language,
+                    Language = config.Language,
                     IsLoaded = false
                 };
             Marshal.StructureToPtr(settings, fileMapping, true);
