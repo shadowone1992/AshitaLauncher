@@ -54,6 +54,7 @@ namespace Ashita.ViewModel
             this._dataService = dataService;
 
             // Connect command handlers..
+            this.SelectAllCommand = new RelayCommand(OnSelecctAllChecked);
             this.RefreshUpdatesCommand = new RelayCommand(OnRefreshUpdatesClicked);
             this.UpdateSelectedCommand = new RelayCommand(OnUpdateSelectedClicked);
             this.UpdateAllFilesCommand = new RelayCommand(OnUpdateAllFilesClicked);
@@ -63,10 +64,24 @@ namespace Ashita.ViewModel
         }
 
         /// <summary>
+        /// Command handler when select all is invoked.
+        /// </summary>
+        private void OnSelecctAllChecked()
+        {
+            foreach (var f in this.UpdateFiles)
+            {
+                f.IsSelected = this.SelectAllChecked;
+            }
+        }
+
+        /// <summary>
         /// Command handler when refresh updates is invoked.
         /// </summary>
         private void OnRefreshUpdatesClicked()
         {
+            // Reset selection checkbox..
+            this.SelectAllChecked = false;
+
             // Prepare for the new update list..
             this.UpdateFiles = null;
             this.NoUpdatesFoundVisibility = Visibility.Hidden;
@@ -203,7 +218,16 @@ namespace Ashita.ViewModel
         }
 
         /// <summary>
-        /// Gets or set the update processing indication visibility.
+        /// Gets or sets the select all checkbox value.
+        /// </summary>
+        public Boolean SelectAllChecked
+        {
+            get { return this.Get<Boolean>("SelectAllChecked"); }
+            set { this.Set("SelectAllChecked", value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the update processing indication visibility.
         /// </summary>
         public Boolean UpdatesProcessingFiles
         {
@@ -228,6 +252,11 @@ namespace Ashita.ViewModel
             get { return this.Get<Visibility>("UpdatingFilesVisibility"); }
             set { this.Set("UpdatingFilesVisibility", value); }
         }
+
+        /// <summary>
+        /// Command definition used to select or deselect all files.
+        /// </summary>
+        public ICommand SelectAllCommand { get; set; }
 
         /// <summary>
         /// Command definition used to refresh the update list.

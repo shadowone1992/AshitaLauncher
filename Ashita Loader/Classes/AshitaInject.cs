@@ -103,7 +103,13 @@ namespace Ashita.Classes
             var procId = ManagedInjector.CreateSuspended(bootFile, String.Format("{0} {1}", bootFile, config.BootCommand));
             if (procId == 0)
             {
-                Error("Ashita failed to load the boot file.");
+                var errorMessage = String.Format(
+                    "Ashita failed to load the boot file.\r\n" +
+                    "PlayOnline Path:\r\n{0}\r\n" +
+                    "Last Error Code: {1}",
+                    bootFile, Marshal.GetLastWin32Error().ToString()
+                    );
+                Error(errorMessage);
                 return false;
             }
 

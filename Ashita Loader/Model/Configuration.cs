@@ -90,8 +90,8 @@ namespace Ashita.Model
                         this.Language = Int32.Parse(settings["language"]);
                         this.ResolutionX = Int32.Parse(settings["resolution_x"]);
                         this.ResolutionY = Int32.Parse(settings["resolution_y"]);
-                        this.BackgroundX = (settings.ContainsKey("backgound_resolution_x")) ? Int32.Parse(settings["backgound_resolution_x"]) : -1;
-                        this.BackgroundY = (settings.ContainsKey("backgound_resolution_y")) ? Int32.Parse(settings["backgound_resolution_y"]) : -1;
+                        this.BackgroundX = (settings.ContainsKey("background_resolution_x")) ? Int32.Parse(settings["background_resolution_x"]) : -1;
+                        this.BackgroundY = (settings.ContainsKey("background_resolution_y")) ? Int32.Parse(settings["background_resolution_y"]) : -1;
                         this.MenuX = (settings.ContainsKey("menu_resolution_x")) ? Int32.Parse(settings["menu_resolution_x"]) : -1;
                         this.MenuY = (settings.ContainsKey("menu_resolution_y")) ? Int32.Parse(settings["menu_resolution_y"]) : -1;
                         this.BootCommand = settings["boot_command"];

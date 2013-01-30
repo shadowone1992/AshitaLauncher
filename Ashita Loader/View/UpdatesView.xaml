@@ -73,6 +73,10 @@
             </StackPanel>
         </Grid>
         
+        <CheckBox Grid.Row="1" VerticalAlignment="Center" Content="Select All" Margin="5,0,0,0" 
+                  IsChecked="{Binding SelectAllChecked}"
+                  Command="{Binding SelectAllCommand}" />
+        
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Margin="0,5,5,5" Content="Refresh" Width="110" Command="{Binding RefreshUpdatesCommand}"/>
             <Button Margin="0,5,5,5" Content="Update Selected" Width="110" Command="{Binding UpdateSelectedCommand}"/>
